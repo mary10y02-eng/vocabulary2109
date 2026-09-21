@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vocabulary Practice</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--text:#20242c;--muted:#697386;--line:#dfe3eb;--accent:#5b5bd6;--good:#16834b;--bad:#c63d3d;--hint:#a96b00}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 Inter,Arial,sans-serif}main{max-width:1050px;margin:0 auto;padding:28px 18px 70px}h1{margin:0 0 6px;font-size:32px}h2{margin:0 0 8px;font-size:23px}.intro,.task,.result{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 3px 14px #00000008}.intro{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.name{padding:11px 13px;border:1px solid var(--line);border-radius:10px;font-size:16px;width:240px}.progress{color:var(--muted);font-size:14px;margin-top:4px}.q{border:1px solid var(--line);border-radius:13px;padding:15px;margin:12px 0}.q-title{font-weight:700;margin-bottom:10px}.options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.option,.btn{border:1px solid #cdd2df;background:#fff;border-radius:10px;padding:10px 13px;cursor:pointer;font-size:15px}.option{text-align:left}.option:hover,.btn:hover{border-color:var(--accent)}.option.correct{border-color:var(--good);background:#eaf8f0}.option.wrong{border-color:var(--bad);background:#fff0f0}.feedback{margin-top:9px;font-size:14px}.good{color:var(--good)}.bad{color:var(--bad)}.hint{color:var(--hint);background:#fff7e8;border-radius:8px;padding:7px 9px;margin-top:7px}.emoji-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px}.emotion{border:1px dashed #bbc2d0;border-radius:12px;padding:13px;text-align:center;background:#fafbff;cursor:grab;font-size:28px}.emotion span{display:block;font-size:13px;margin-top:4px}.drop-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px}.drop{min-height:70px;border:2px dashed #c8cedb;border-radius:12px;padding:8px;text-align:center;background:#fff}.drop strong{display:block}.drop.over{border-color:var(--accent);background:#f2f2ff}.drop.correct{border-color:var(--good);background:#effaf4}.drop.wrong{border-color:var(--bad);background:#fff1f1}.spelling{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.spelling input,.sentence-input{padding:10px 12px;border:1px solid var(--line);border-radius:9px;font-size:16px}.spelling input{width:210px}.select{padding:10px;border:1px solid var(--line);border-radius:9px;font-size:15px;width:100%}.flash-wrap{max-width:700px;margin:10px auto}.flashcard{min-height:260px;perspective:1000px;position:relative;cursor:pointer}.flash-front,.flash-back{min-height:260px;border:1px solid var(--line);border-radius:18px;padding:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 5px 20px #0000000d;backface-visibility:hidden;transition:transform .45s;position:absolute;inset:0;background:#fff}.flash-front strong,.flash-back strong{font-size:34px;margin:18px 0}.flash-front small,.flash-back small{color:var(--muted)}.flash-back{transform:rotateY(180deg);background:#f8f9ff}.flashcard.flipped .flash-front{transform:rotateY(180deg)}.flashcard.flipped .flash-back{transform:rotateY(360deg)}.flash-number{font-size:13px;color:var(--muted)}.flash-controls{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:18px}.definition-big{font-size:22px;font-weight:700;text-align:center;margin-bottom:14px}.definition-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:9px;align-items:center}.definition-grid .ru{padding:10px 12px;background:#f8f9fc;border-radius:9px}.sentence-row{border:1px solid var(--line);padding:13px;border-radius:12px;margin:10px 0}.sentence-row input{width:100%;margin-top:8px}.sentence-row .prompt{font-weight:700}.toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.small{font-size:13px;color:var(--muted)}.score{font-size:28px;font-weight:800}.hidden{display:none}.error-field{border-color:var(--bad)!important;background:#fff6f6}.result textarea{width:100%;min-height:130px;padding:10px;border:1px solid var(--line);border-radius:9px;font-family:inherit}.tag{display:inline-block;padding:3px 8px;border-radius:999px;background:#eef0ff;color:#4d4db8;font-size:12px;margin-left:5px}@media(max-width:700px){.options,.emoji-grid,.drop-grid{grid-template-columns:repeat(2,1fr)}.definition-grid{grid-template-columns:1fr}.name{width:100%}}
+</style>
+</head>
+<body>
+<main>
+<section class="intro">
+<div style="flex:1"><h1>Vocabulary Practice</h1><div class="progress">Adjectives + verbs • A2–B1/B2 practice</div></div>
+<input id="studentName" class="name" placeholder="Student name" autocomplete="off">
+</section>
+
+<section class="task" id="task1"><h2>Task 1 — Flashcards</h2><p class="small">Review all the vocabulary before the quiz. Click a card to flip it and reveal the Russian definition.</p><div id="flashcards"></div></section>
+
+<section class="task" id="task2"><h2>Task 2 — Definition Quiz</h2><p class="small">Choose the English word that matches the Russian definition. This quiz covers <strong>all 54 words</strong>.</p><div id="definitionQuiz"></div></section>
+
+<section class="task" id="task3"><h2>Task 3 — Match the emotions</h2><p class="small">Drag each emoji to the correct emotion. On a mistake, you will get a new letter hint for the correct word. You can also tap an emoji and then tap a word on a phone.</p><div id="emotions"></div><div class="feedback" id="emotionFeedback"></div></section>
+
+<section class="task" id="task4"><h2>Task 4 — Spelling Challenge</h2><p class="small">Type the adjective. No copy/paste. After each mistake, another correct letter is revealed.</p><div id="spelling"></div></section>
+
+<section class="task" id="task5"><h2>Task 5 — Complete the sentence</h2><p class="small">Choose the correct verb/adjective. Pay attention to the grammar pattern and collocation.</p><div id="sentences"></div></section>
+
+<section class="task" id="task6"><h2>Task 6 — Make your own sentences</h2><p>Write at least 8 original sentences. Use the given word and noun naturally. The teacher can review them in the final result.</p><div id="writing"></div></section>
+
+<section class="result"><h2>Final result</h2><div class="score" id="score">0%</div><p id="scoreDetails" class="small">Complete the tasks to calculate your result.</p><textarea id="resultText" readonly placeholder="Your result will appear here..."></textarea><div class="toolbar"><button class="btn primary" id="copyBtn">Copy result</button><button class="btn" id="shareBtn">Share result</button></div></section>
+</main>
+<script>
+'use strict';
+const adjectives=['angry','annoyed','confused','surprised','worried','upset','disappointed','excited','tired','sleepy','scared','nervous','jealous','curious','serious','strange','unusual','dangerous','suspicious','unexpected','embarrassing','ridiculous','delicious','exhausting','successful','lucky','unlucky'];
+const verbs=['complain','argue','refuse','avoid','realise','discover','notice','decide','promise','expect','pretend','manage','fail','escape','return','appear','disappear','happen','change','protect','injure','recover','celebrate','exchange','agree','be late','predict'];
+const collocations={complain:'complain about something',argue:'argue with someone',refuse:'refuse to do something',avoid:'avoid something / avoid doing something',realise:'realise something',discover:'discover something',notice:'notice something',decide:'decide to do something',promise:'promise to do something',expect:'expect something to happen',pretend:'pretend to be someone/something',manage:'manage to do something',fail:'fail to do something',escape:'escape from somewhere',return:'return home',appear:'appear suddenly',disappear:'disappear',happen:'something happens',change:'change something',protect:'protect someone',injure:'injure yourself/someone',recover:'recover from something',celebrate:'celebrate something',exchange:'I give you X, you give me Y',agree:'agree', 'be late':'be late',predict:'predict'};
+const defs={
+ angry:'злой, сердитый',annoyed:'раздражённый',confused:'растерянный, сбитый с толку',surprised:'удивлённый',worried:'встревоженный, обеспокоенный',upset:'расстроенный',disappointed:'разочарованный',excited:'взволнованный, воодушевлённый',tired:'уставший',sleepy:'сонный',scared:'испуганный',nervous:'нервный, взволнованный',jealous:'ревнивый, завистливый',curious:'любопытный',serious:'серьёзный',strange:'странный',unusual:'необычный',dangerous:'опасный',suspicious:'подозрительный',unexpected:'неожиданный',embarrassing:'неловкий, вызывающий смущение',ridiculous:'нелепый, смешной',delicious:'вкусный',exhausting:'изнурительный, очень утомительный',successful:'успешный',lucky:'удачливый, везучий',unlucky:'невезучий',
+ complain:'жаловаться',argue:'спорить, ссориться',refuse:'отказываться',avoid:'избегать',realise:'осознать, понять',discover:'обнаружить, узнать',notice:'заметить',decide:'решить',promise:'пообещать',expect:'ожидать',pretend:'притворяться',manage:'суметь, справиться',fail:'не суметь, потерпеть неудачу',escape:'сбежать, выбраться',return:'вернуться',appear:'появиться',disappear:'исчезнуть',happen:'произойти, случиться',change:'изменить, поменять',protect:'защитить',injure:'травмировать, поранить',recover:'восстановиться, оправиться',celebrate:'праздновать, отмечать',exchange:'обменивать(ся)',agree:'соглашаться', 'be late':'опаздывать',predict:'предсказывать'
+};
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function esc(s){return s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function blockPaste(el){['paste','copy','cut','drop'].forEach(ev=>el.addEventListener(ev,e=>e.preventDefault()));el.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&['v','c','x'].includes(e.key.toLowerCase()))e.preventDefault()});el.addEventListener('contextmenu',e=>e.preventDefault())}
+let points=0,maxPoints=0,completed=new Set(),wrongNotes=[];
+function mark(){const pct=maxPoints?Math.round(points/maxPoints*100):0;document.getElementById('score').textContent=pct+'%';document.getElementById('scoreDetails').textContent=`${points} correct points out of ${maxPoints} available. ${completed.size}/6 tasks started/completed.`;buildResult()}
+function buildResult(){const name=document.getElementById('studentName').value.trim()||'Student';let text=`Vocabulary Practice — ${name}\nScore: ${document.getElementById('score').textContent}\n\n`;text+=wrongNotes.length?'Notes / corrections:\n'+wrongNotes.map(x=>'• '+x).join('\n')+'\n\n':'No recorded mistakes in the automatic tasks.\n\n';text+='Task 6 sentences:\n';document.querySelectorAll('#writing input').forEach((i,n)=>{text+=`${n+1}. ${i.value.trim()||'[not completed]'}\n`});document.getElementById('resultText').value=text}
+
+// TASK 1 — FLASHCARDS
+function renderFlashcards(){
+  const box=document.getElementById('flashcards');
+  const words=[...adjectives,...verbs];
+  let index=0;
+  box.innerHTML=`<div class="flash-wrap"><div class="flashcard" id="flashcard" role="button" tabindex="0"><div class="flash-front"><span class="flash-number" id="flashNumber"></span><strong id="flashWord"></strong><small>Click to reveal definition</small></div><div class="flash-back"><span class="flash-number" id="flashNumberBack"></span><strong id="flashDef"></strong><small>Click to flip back</small></div></div><div class="flash-controls"><button class="btn" id="prevFlash">← Previous</button><span id="flashCounter" class="small"></span><button class="btn primary" id="nextFlash">Next →</button></div></div>`;
+  const card=document.getElementById('flashcard');
+  function show(){const w=words[index];document.getElementById('flashWord').textContent=w;document.getElementById('flashDef').textContent=defs[w];document.getElementById('flashNumber').textContent=`${index+1} / ${words.length}`;document.getElementById('flashNumberBack').textContent=`${index+1} / ${words.length}`;document.getElementById('flashCounter').textContent=`Card ${index+1} of ${words.length}`;card.classList.remove('flipped')}
+  card.onclick=()=>card.classList.toggle('flipped');
+  card.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();card.classList.toggle('flipped')}};
+  document.getElementById('prevFlash').onclick=()=>{index=(index-1+words.length)%words.length;show()};
+  document.getElementById('nextFlash').onclick=()=>{index=(index+1)%words.length;show()};
+  show();
+}
+
+// TASK 2 — ALL VOCABULARY DEFINITION QUIZ
+const allWords=[...adjectives,...verbs];
+let definitionQuizIndex=0;
+const definitionQuizOrder=shuffle(allWords);
+function renderDefinitionQuiz(){
+  const box=document.getElementById('definitionQuiz');
+  definitionQuizIndex=0;
+  function render(){
+    if(definitionQuizIndex>=definitionQuizOrder.length){box.innerHTML='<div class="good"><strong>✓ Definition quiz complete!</strong> You have reviewed all 54 words.</div>';completed.add(2);mark();return}
+    const answer=definitionQuizOrder[definitionQuizIndex];
+    const pool=shuffle(allWords.filter(w=>w!==answer)).slice(0,3);
+    const opts=shuffle([answer,...pool]);
+    box.innerHTML=`<div class="q" id="defQ"><div class="q-title">${definitionQuizIndex+1}/54 — Which English word matches this definition?</div><div class="ru definition-big">${esc(defs[answer])}</div><div class="options">${opts.map(o=>`<button class="option" data-answer="${esc(o)}">${esc(o)}</button>`).join('')}</div><div class="feedback"></div><div class="small">You have up to 3 attempts.</div></div>`;
+    const d=document.getElementById('defQ');d.dataset.tries='0';
+    d.querySelectorAll('.option').forEach(b=>b.onclick=()=>{
+      if(d.dataset.done)return;
+      const tries=+d.dataset.tries+1;d.dataset.tries=tries;
+      const fb=d.querySelector('.feedback');
+      if(b.dataset.answer===answer){b.classList.add('correct');fb.innerHTML=`<span class="good">✓ Correct!</span> <strong>${esc(answer)}</strong> — ${esc(defs[answer])}`;d.dataset.done='1';points++;maxPoints++;completed.add(2);mark();setTimeout(()=>{definitionQuizIndex++;render()},500)}
+      else{b.classList.add('wrong');fb.innerHTML=`<span class="bad">✗ Not quite.</span> ${esc(b.dataset.answer)} means “${esc(defs[b.dataset.answer])}”.${tries<3?' Try another option.':''}`;if(tries>=3){const c=[...d.querySelectorAll('.option')].find(x=>x.dataset.answer===answer);c.classList.add('correct');fb.innerHTML+=` <div class="hint">Answer: <strong>${esc(answer)}</strong> — ${esc(defs[answer])}</div>`;d.dataset.done='1';completed.add(2);mark();setTimeout(()=>{definitionQuizIndex++;render()},700)}}
+    });
+  }
+  render();
+}
+
+// TASK 3
+const emotions=[['😡','angry'],['😒','annoyed'],['😕','confused'],['😲','surprised'],['😟','worried'],['😢','upset'],['😞','disappointed'],['🤩','excited'],['😴','sleepy'],['😨','scared']];
+let selectedEmoji=null;const emotionHints={};
+function renderEmotions(){const box=document.getElementById('emotions');box.innerHTML=`<div class="emoji-grid" id="emojiBank">${shuffle(emotions).map((e,i)=>`<div class="emotion" draggable="true" data-word="${e[1]}" id="emo${i}">${e[0]}<span>${e[1]}</span></div>`).join('')}</div><div class="drop-grid">${shuffle(emotions).map(e=>`<div class="drop" data-word="${e[1]}"><strong>${e[1]}</strong><span>drop emoji here</span></div>`).join('')}</div>`;box.querySelectorAll('.emotion').forEach(el=>{el.addEventListener('dragstart',()=>{selectedEmoji=el;});el.addEventListener('click',()=>{selectedEmoji=el;document.getElementById('emotionFeedback').textContent=`Selected ${el.textContent.trim()}. Now tap its matching word.`})});box.querySelectorAll('.drop').forEach(el=>{el.addEventListener('dragover',e=>{e.preventDefault();el.classList.add('over')});el.addEventListener('dragleave',()=>el.classList.remove('over'));el.addEventListener('drop',e=>{e.preventDefault();el.classList.remove('over');placeEmotion(el)});el.addEventListener('click',()=>{if(selectedEmoji)placeEmotion(el)})})}
+function placeEmotion(drop){if(!selectedEmoji)return;const word=selectedEmoji.dataset.word;if(drop.dataset.word===word){drop.classList.remove('wrong');drop.classList.add('correct');drop.querySelector('span').textContent=selectedEmoji.textContent.trim().split(word)[0]||'✓';selectedEmoji.style.visibility='hidden';selectedEmoji=null;points++;maxPoints++;completed.add(2);document.getElementById('emotionFeedback').innerHTML='<span class="good">✓ Correct!</span>';mark()}else{drop.classList.add('wrong');const answer=drop.dataset.word;const target=word;const next=(emotionHints[target]||0)+1;emotionHints[target]=next;const hint=target.slice(0,Math.min(next,target.length));document.getElementById('emotionFeedback').innerHTML=`<span class="bad">✗ Not this one.</span> Hint: the correct answer starts with <strong>${hint}</strong>`;wrongNotes.push(`Emotion matching: ${target} — hint revealed: ${hint}`)}}
+
+// TASK 3
+const spellWords=shuffle(adjectives).slice(0,10);let spellIndex=0;
+function renderSpelling(){const box=document.getElementById('spelling');showSpelling();}
+function showSpelling(){const word=spellWords[spellIndex];const shown=word.split('').map((c,i)=>i<((window.spellHints||{})[word]||0)?c:'_').join(' ');document.getElementById('spelling').innerHTML=`<div class="q"><div class="q-title">${spellIndex+1}/10 — Type the adjective</div><div class="small">Clue: ${defs[word]}</div><div class="hint">Letters revealed: ${shown}</div><div class="spelling"><input id="spellInput" autocomplete="off" spellcheck="false"><button class="btn primary" id="spellBtn">Check</button></div><div class="feedback" id="spellFb"></div></div>`;const inp=document.getElementById('spellInput');blockPaste(inp);document.getElementById('spellBtn').onclick=checkSpelling;inp.addEventListener('keydown',e=>{if(e.key==='Enter')checkSpelling()})}
+function checkSpelling(){const word=spellWords[spellIndex],inp=document.getElementById('spellInput'),fb=document.getElementById('spellFb');if(inp.value.trim().toLowerCase()===word){fb.innerHTML='<span class="good">✓ Correct!</span>';points++;maxPoints++;spellIndex++;completed.add(4);if(spellIndex<spellWords.length)setTimeout(showSpelling,350);else{document.getElementById('spelling').innerHTML='<div class="good"><strong>✓ Spelling challenge complete!</strong></div>';mark()}mark()}else{window.spellHints=window.spellHints||{};window.spellHints[word]=Math.min((window.spellHints[word]||0)+1,word.length);const n=window.spellHints[word];fb.innerHTML=`<span class="bad">✗ Check the spelling.</span>`;if(n<word.length)fb.innerHTML+=`<div class="hint">Help: letter ${n} is <strong>${word[n-1]}</strong>. Try again.</div>`;else fb.innerHTML+=`<div class="hint">The word is <strong>${word}</strong>.</div>`;wrongNotes.push(`Spelling: ${word}`);inp.classList.add('error-field');setTimeout(()=>inp.classList.remove('error-field'),600)}}
+
+// TASK 5
+const sentenceData=[
+ ['She ___ to help me because she was too busy.',['refused','noticed','disappeared','celebrated'],'refused','The pattern is “refuse to do something”.'],
+ ['We should ___ the problem before it gets worse.',['avoid','protect','return','appear'],'avoid','“Avoid” can be followed by a noun or -ing form.'],
+ ['I ___ that I had left my keys at work.',['realised','argued','escaped','predicted'],'realised','“Realise” means understand or become aware of something.'],
+ ['They ___ a strange noise outside.',['noticed','promised','recovered','were late'],'noticed','“Notice something” means become aware of it.'],
+ ['He ___ to be asleep, but he was actually listening.',['pretended','managed','exchanged','injured'],'pretended','“Pretend to be…” is the correct pattern.'],
+ ['She ___ to finish the race despite being exhausted.',['managed','refused','disappeared','complained'],'managed','“Manage to do something” means succeed in doing it.'],
+ ['I ___ to call you tomorrow.',['promise','escape','happen','change'],'promise','“Promise to do something” is the correct pattern.'],
+ ['The children ___ from the room when they heard the alarm.',['escaped','celebrated','agreed','returned'],'escaped','“Escape from somewhere” is the correct phrase.'],
+ ['We ___ about the service at the hotel.',['complained','predicted','appeared','protected'],'complained','“Complain about something” is the correct collocation.'],
+ ['Can you ___ what will happen next?',['predict','injure','recover','exchange'],'predict','“Predict” means say what you think will happen in the future.']
+];
+function renderSentences(){const box=document.getElementById('sentences');sentenceData.forEach((q,i)=>{const d=document.createElement('div');d.className='q';d.dataset.tries=0;d.innerHTML=`<div class="q-title">${i+1}. ${q[0]}</div><div class="options">${shuffle(q[1]).map(o=>`<button class="option" data-answer="${esc(o)}">${esc(o)}</button>`).join('')}</div><div class="feedback"></div>`;d.querySelectorAll('.option').forEach(b=>b.onclick=()=>sentenceAnswer(d,b,q));box.appendChild(d);maxPoints++})}
+function sentenceAnswer(d,b,q){if(d.dataset.done)return;let tries=+d.dataset.tries+1;d.dataset.tries=tries;const fb=d.querySelector('.feedback');if(b.dataset.answer===q[2]){b.classList.add('correct');fb.innerHTML=`<span class="good">✓ Correct.</span> ${q[3]}`;d.dataset.done='1';points++;completed.add(5);d.querySelectorAll('button').forEach(x=>x.disabled=true);mark()}else{b.classList.add('wrong');fb.innerHTML=`<span class="bad">✗ Incorrect.</span> ${q[3]}${tries<3?' Try another option.':''}`;if(tries>=3){const c=[...d.querySelectorAll('button')].find(x=>x.dataset.answer===q[2]);c.classList.add('correct');fb.innerHTML+=` <strong>Answer: ${q[2]}</strong>`;d.dataset.done='1';completed.add(5);mark()}}}
+
+// TASK 6
+const writingPrompts=[['complain','long queue'],['curious','new neighbour'],['avoid','dangerous road'],['unexpected','message'],['manage','difficult exam'],['protect','small child'],['embarrassing','mistake'],['celebrate','success']];
+function renderWriting(){const box=document.getElementById('writing');box.innerHTML=writingPrompts.map((p,i)=>`<div class="sentence-row"><div class="prompt">${i+1}. Use <span class="tag">${p[0]}</span> + <span class="tag">${p[1]}</span></div><input class="sentence-input" autocomplete="off" placeholder="Write your sentence here..."></div>`).join('');box.querySelectorAll('input').forEach(blockPaste);box.querySelectorAll('input').forEach(i=>i.addEventListener('input',buildResult));}
+
+renderFlashcards();renderDefinitionQuiz();renderEmotions();renderSpelling();renderSentences();renderWriting();
+document.getElementById('studentName').addEventListener('input',buildResult);
+document.getElementById('copyBtn').onclick=async()=>{const t=document.getElementById('resultText').value;try{await navigator.clipboard.writeText(t);document.getElementById('copyBtn').textContent='Copied!';setTimeout(()=>document.getElementById('copyBtn').textContent='Copy result',1200)}catch(e){document.getElementById('resultText').select();document.execCommand('copy')}};
+document.getElementById('shareBtn').onclick=async()=>{const t=document.getElementById('resultText').value;if(navigator.share){try{await navigator.share({title:'Vocabulary Practice Result',text:t})}catch(e){}}else{document.getElementById('resultText').select();document.execCommand('copy');alert('Result copied. You can paste it into a message to your teacher.')}};
+mark();
+</script>
+</body></html>
